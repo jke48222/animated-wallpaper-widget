@@ -34,7 +34,10 @@ export const className = `
   iframe { width: 100%; height: 100%; border: 0; display: block; }
 `;
 
-const src = "swirl-8k.html?speed=" + encodeURIComponent(SPEED) +
+// Params are passed via a hash fragment, which swirl-8k.html reads from
+// location.hash. A fragment never affects how the asset path is resolved, so it
+// is robust regardless of how the file is served.
+const src = "swirl-8k.html#speed=" + encodeURIComponent(SPEED) +
   (IMAGE ? "&img=" + encodeURIComponent(IMAGE) : "");
 
 export const render = () => (

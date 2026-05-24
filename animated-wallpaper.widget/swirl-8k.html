@@ -19,7 +19,7 @@ const canvas = document.getElementById('c');
 //   ?speed=<n>  multiplies animation speed (default 1; 0.5 = half, 2 = double)
 //   ?img=<url>  use a different image; must be a local file or a CORS-enabled
 //               URL, otherwise WebGL refuses to sample the (tainted) texture.
-const PARAMS = new URLSearchParams(location.search);
+const PARAMS = new URLSearchParams((location.hash || location.search).slice(1));
 const SPEED = parseFloat(PARAMS.get('speed')) || 1;
 const IMG_OVERRIDE = PARAMS.get('img');
 
