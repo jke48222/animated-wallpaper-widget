@@ -8,13 +8,13 @@ runs on any Mac with no extra files beyond the bundled assets.
 
 ![preview](screenshot.png)
 
-<video src="https://github.com/jke48222/animated-wallpaper-widget/raw/main/animated-wallpaper.mp4" controls width="100%"></video>
+[![Wallpaper demo — click to play](screenshot.png)](animated-wallpaper.mp4)
 
 ### On the desktop
 
 The widget shown running alongside the full set:
 
-<video src="https://github.com/jke48222/animated-wallpaper-widget/raw/main/homescreen.mp4" controls width="100%"></video>
+[![Homescreen demo — click to play](homescreen-poster.png)](homescreen.mp4)
 
 ## Install
 
