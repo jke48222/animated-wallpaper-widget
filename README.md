@@ -8,7 +8,7 @@ runs on any Mac with no extra files beyond the bundled assets.
 
 ![preview](screenshot.png)
 
-[![Wallpaper demo — click to play](screenshot.png)](animated-wallpaper.mp4)
+▶ [Watch the wallpaper demo](animated-wallpaper.mp4)
 
 ### On the desktop
 
@@ -39,12 +39,6 @@ the inlined design-system block at the top of `index.jsx`.
 
 - `index.jsx`
 - `swirl-8k.html`
-
-## Submitting to the Übersicht gallery
-
-Create a public GitHub repo with `widget.json`, `animated-wallpaper.widget.zip`, and a
-258x160 (or 516x320 hi-res) `screenshot.png`, then
-[open an issue](https://github.com/felixhageloh/uebersicht-widgets/issues) with the URL.
 
 ## Other widgets
 

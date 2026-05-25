@@ -16,16 +16,20 @@ const IMAGE = "";
 export const refreshFrequency = false;
 
 // Übersicht positions each widget's wrapper by id using inline absolute styles.
-// These rules override that wrapper so it spans the entire viewport with no gap
-// under the menu bar; the iframe then fills the wrapper edge to edge.
+// These rules override that wrapper so it spans the entire viewport. The
+// viewport origin sits below the menu bar, so a top:0 wrapper leaves the real
+// desktop showing in that strip. Overscanning upward by MENUBAR_OVERSCAN (more
+// than any menu bar, including notched displays) pulls the iframe up under the
+// menu bar; the cover-fit image absorbs the extra height with no visible seam.
+const MENUBAR_OVERSCAN = 48; // px
 export const className = `
   position: fixed !important;
-  top: 0 !important;
+  top: -${MENUBAR_OVERSCAN}px !important;
   left: 0 !important;
   right: 0 !important;
   bottom: 0 !important;
   width: 100vw !important;
-  height: 100vh !important;
+  height: calc(100vh + ${MENUBAR_OVERSCAN}px) !important;
   margin: 0 !important;
   padding: 0 !important;
   z-index: -1;
@@ -37,7 +41,7 @@ export const className = `
 // Params are passed via a hash fragment, which swirl-8k.html reads from
 // location.hash. A fragment never affects how the asset path is resolved, so it
 // is robust regardless of how the file is served.
-const src = "swirl-8k.html#speed=" + encodeURIComponent(SPEED) +
+const src = "animated-wallpaper.widget/swirl-8k.html#speed=" + encodeURIComponent(SPEED) +
   (IMAGE ? "&img=" + encodeURIComponent(IMAGE) : "");
 
 export const render = () => (
