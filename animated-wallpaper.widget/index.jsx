@@ -16,11 +16,13 @@ const IMAGE = "";
 export const refreshFrequency = false;
 
 // Übersicht positions each widget's wrapper by id using inline absolute styles.
-// These rules override that wrapper so it spans the entire viewport. The
-// viewport origin sits below the menu bar, so a top:0 wrapper leaves the real
-// desktop showing in that strip. Overscanning upward by MENUBAR_OVERSCAN (more
-// than any menu bar, including notched displays) pulls the iframe up under the
-// menu bar; the cover-fit image absorbs the extra height with no visible seam.
+// We override that wrapper to span the entire screen. macOS reserves the very
+// top strip for the system menu bar and some Übersicht builds inset the desktop
+// web view below it, leaving the real desktop showing there. We pull the iframe
+// up by MENUBAR_OVERSCAN and reset the page's own insets (see GLOBAL_RESET) so
+// the animation reaches as high as the web view allows. If a thin strip still
+// remains, that is the OS menu bar itself (a desktop widget cannot paint over
+// it); enabling "Automatically hide and show the menu bar" removes it entirely.
 const MENUBAR_OVERSCAN = 48; // px
 export const className = `
   position: fixed !important;
@@ -38,6 +40,13 @@ export const className = `
   iframe { width: 100%; height: 100%; border: 0; display: block; }
 `;
 
+// Reset any inset Übersicht / the page applies to the desktop web view so our
+// fixed, full-bleed iframe truly starts at the very top-left of the screen.
+const GLOBAL_RESET = `
+  html, body { margin: 0 !important; padding: 0 !important; border: 0 !important; }
+  #main, #widgets, .uesidebar { margin: 0 !important; padding: 0 !important; top: 0 !important; }
+`;
+
 // Params are passed via a hash fragment, which swirl-8k.html reads from
 // location.hash. A fragment never affects how the asset path is resolved, so it
 // is robust regardless of how the file is served.
@@ -45,5 +54,8 @@ const src = "animated-wallpaper.widget/swirl-8k.html#speed=" + encodeURIComponen
   (IMAGE ? "&img=" + encodeURIComponent(IMAGE) : "");
 
 export const render = () => (
-  <iframe src={src} scrolling="no" title="Animated wallpaper" />
+  <div>
+    <style dangerouslySetInnerHTML={{ __html: GLOBAL_RESET }} />
+    <iframe src={src} scrolling="no" title="Animated wallpaper" />
+  </div>
 );
